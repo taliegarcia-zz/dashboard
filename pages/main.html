@@ -7,66 +7,61 @@
     <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
   </div>
 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <table class="table table-bordered table-striped">
+  <div class="panel">
+    <p>Ordered By: {{sortType}}</p>
+    <p>Reverse Sort: {{sortReverse}}</p>
+  </div>
 
-        <thead>
-          <tr>
-            <td>
-                Name
-            </td>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+            Email
+          </a>
+        </td>
 
-            <td>
-              <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-                Email
-                <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
-              </a>
-            </td>
+        <td>
+          Company
+        </td>
+        <td>
+          ID
+        </td>
+        <td>
+          Score
+        </td>
+      </tr>
+    </thead>
 
-            <td>
-                Company
-            </td>
+    <tbody>
+      <tr ng-repeat="user in users | orderBy:sortType:sortReverse | pagination: curPage * usersPerPage | limitTo: usersPerPage">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.company }}</td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.score }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-            <td>
-                ID
-            </td>
-
-            <td>
-                Score
-            </td>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr ng-repeat="user in users | orderBy:sortType:sortReverse | pagination: curPage * usersPerPage | limitTo: usersPerPage">
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.company }}</td>
-            <td>{{ user.id }}</td>
-            <td>{{ user.score }}</td>
-          </tr>
-        </tbody>
-
-      </table>
-
-      <div class="pagination pagination-centered" ng-show="users.length">
-        <ul class="pagination-control pagination">
-          <li>
-          <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
-          ng-click="curPage=curPage-1"> &lt; PREV</button>
-          </li>
-          <li>
-          <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
-          </li>
-          <li>
-          <button type="button" class="btn btn-primary"
-          ng-disabled="curPage >= users.length/usersPerPage - 1"
-          ng-click="curPage = curPage+1">NEXT &gt;</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-
+  <div class="pagination pagination-centered" ng-show="users.length">
+    <ul class="pagination-control pagination">
+      <li>
+      <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+      ng-click="curPage=curPage-1"> &lt; PREV</button>
+      </li>
+      <li>
+      <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+      </li>
+      <li>
+      <button type="button" class="btn btn-primary"
+      ng-disabled="curPage >= users.length/usersPerPage - 1"
+      ng-click="curPage = curPage+1">NEXT &gt;</button>
+      </li>
+    </ul>
+  </div>
 </div>
+
