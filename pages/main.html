@@ -7,21 +7,18 @@
     <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
   </div>
 
-  <div class="panel">
-    <p>Ordered By: {{sortType}}</p>
-    <p>Reverse Sort: {{sortReverse}}</p>
-  </div>
-
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <td>
           Name
         </td>
-        <td>
-          <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-            Email
-          </a>
+        <td class="link">
+          Email
+          <span ng-click="changeSorting('email')">
+            <span ng-show="!sort.descending" class="fa fa-caret-down">down</span>
+            <span ng-show="sort.descending" class="fa fa-caret-up">up</span>
+          </span>
         </td>
 
         <td>
@@ -37,7 +34,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="user in users | orderBy:sortType:sortReverse | pagination: curPage * usersPerPage | limitTo: usersPerPage">
+      <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | limitTo: usersPerPage">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.company }}</td>

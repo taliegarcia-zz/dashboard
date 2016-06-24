@@ -26,12 +26,6 @@ dashboardApp.controller('mainController', ['$scope', '$log', function($scope, $l
 dashboardApp.controller('tableController', ['$scope', '$http', function($scope, $http){
   $scope.controllerName = 'tableController';
 
-  // Sorting
-  $scope.sortType = 'email'; // set the default sort type
-  $scope.sortReverse = false;  // set the default sort order
-  $scope.searchEmail  = '';
-
-
   $scope.users = [];
 
   $http.get('/data.json')
@@ -49,6 +43,27 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
       return Math.ceil($scope.users.length / $scope.usersPerPage);
     };
   }
+
+  // Sorting & Searching
+  // $scope.sortType = 'email'; // set the default sort type
+  // $scope.sortReverse = false;  // set the default sort order
+  // $scope.searchEmail  = '';
+
+  $scope.sort = {
+      column: 'email',
+      descending: false
+  };
+  $scope.changeSorting = function(column) {
+      var sort = $scope.sort;
+
+      if (sort.column == column) {
+          sort.descending = !sort.descending;
+      } else {
+          sort.column = column;
+          sort.descending = false;
+      }
+  };
+
 }]);
 
 
