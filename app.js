@@ -1,5 +1,5 @@
 // MODULE
-var dashboardApp = angular.module('dashboardApp', ['ngRoute'])
+var dashboardApp = angular.module('dashboardApp', ['ngRoute']);
 
 
 // ROUTES
@@ -24,16 +24,33 @@ dashboardApp.controller('mainController', ['$scope', '$log', function($scope, $l
 
 // TABLE CONTROLLER
 dashboardApp.controller('tableController', ['$scope', '$http', function($scope, $http){
-    $scope.controllerName = 'tableController';
+  $scope.controllerName = 'tableController';
 
-    $scope.users = [];
+  $scope.users = [];
 
-    $http.get('/data.json')
-      .success(function(result) {
-        $scope.users = result;
-      })
-      .error(function(data,status){
-        console.log(data);
-      })
+  $http.get('/data.json')
+    .success(function(result) {
+      $scope.users = result;
+    })
+    .error(function(data,status){
+      console.log(data);
+    })
 
+  $scope.showTable = function() {
+    $scope.curPage = 0;
+    $scope.usersPerPage = 15;
+    $scope.numberOfPages = function() {
+      return Math.ceil($scope.users.length / $scope.usersPerPage);
+    };
+  }
 }]);
+
+
+angular.module('dashboardApp').filter('pagination', function() {
+  return function(input, start) {
+  if (!input || !input.length) { return; }
+    start = +start;
+    return input.slice(start);
+  };
+});
+

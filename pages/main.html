@@ -1,6 +1,6 @@
 <h2>The main dashboard page.</h2>
 
-<div ng-controller="tableController">
+<div ng-controller="tableController" ng-init="showTable()">
 
   <table class="table table-bordered table-striped">
 
@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="user in users">
+      <tr ng-repeat="user in users | pagination: curPage * usersPerPage | limitTo: usersPerPage">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.company }}</td>
@@ -40,5 +40,20 @@
 
   </table>
 
+  <div class="pagination pagination-centered" ng-show="users.length">
+    <ul class="pagination-control pagination">
+      <li>
+      <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+      ng-click="curPage=curPage-1"> &lt; PREV</button>
+      </li>
+      <li>
+      <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+      </li>
+      <li>
+      <button type="button" class="btn btn-primary"
+      ng-disabled="curPage >= users.length/usersPerPage - 1"
+      ng-click="curPage = curPage+1">NEXT &gt;</button>
+      </li>
+    </ul>
 
 </div>
