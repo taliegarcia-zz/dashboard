@@ -18,4 +18,13 @@ dashboardApp.config(function ($routeProvider) {
 // MAIN CONTROLLER
 dashboardApp.controller('mainController', ['$scope', '$log', function($scope, $log){
 
+    $scope.controllerName = 'mainController'; // theres probably an angular way to get the controller name
+
+}]);
+
+// TABLE CONTROLLER
+dashboardApp.controller('tableController', ['$scope', '$log', function($scope, $log){
+
+  $scope.controllerName = 'tableController';
+
 }]);
