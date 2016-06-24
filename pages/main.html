@@ -2,58 +2,67 @@
 
 <div ng-controller="tableController" ng-init="showTable()">
 
-  <table class="table table-bordered table-striped">
+  <div class="panel">
+    <label for="usersPerPage">Users per page:</label>
+    <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
+  </div>
 
-    <thead>
-      <tr>
-        <td>
-            Name
-        </td>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-bordered table-striped">
 
-        <td>
-            Email
-        </td>
+        <thead>
+          <tr>
+            <td>
+                Name
+            </td>
 
-        <td>
-            Company
-        </td>
+            <td>
+                Email
+            </td>
 
-        <td>
-            ID
-        </td>
+            <td>
+                Company
+            </td>
 
-        <td>
-            Score
-        </td>
-      </tr>
-    </thead>
+            <td>
+                ID
+            </td>
 
-    <tbody>
-      <tr ng-repeat="user in users | pagination: curPage * usersPerPage | limitTo: usersPerPage">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.company }}</td>
-        <td>{{ user.id }}</td>
-        <td>{{ user.score }}</td>
-      </tr>
-    </tbody>
+            <td>
+                Score
+            </td>
+          </tr>
+        </thead>
 
-  </table>
+        <tbody>
+          <tr ng-repeat="user in users | pagination: curPage * usersPerPage | limitTo: usersPerPage">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.company }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.score }}</td>
+          </tr>
+        </tbody>
 
-  <div class="pagination pagination-centered" ng-show="users.length">
-    <ul class="pagination-control pagination">
-      <li>
-      <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
-      ng-click="curPage=curPage-1"> &lt; PREV</button>
-      </li>
-      <li>
-      <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
-      </li>
-      <li>
-      <button type="button" class="btn btn-primary"
-      ng-disabled="curPage >= users.length/usersPerPage - 1"
-      ng-click="curPage = curPage+1">NEXT &gt;</button>
-      </li>
-    </ul>
+      </table>
+
+      <div class="pagination pagination-centered" ng-show="users.length">
+        <ul class="pagination-control pagination">
+          <li>
+          <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+          ng-click="curPage=curPage-1"> &lt; PREV</button>
+          </li>
+          <li>
+          <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+          </li>
+          <li>
+          <button type="button" class="btn btn-primary"
+          ng-disabled="curPage >= users.length/usersPerPage - 1"
+          ng-click="curPage = curPage+1">NEXT &gt;</button>
+          </li>
+        </ul>
+      </div>
+    </div>
 
 </div>
