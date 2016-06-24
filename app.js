@@ -43,6 +43,13 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
       return Math.ceil($scope.users.length / $scope.usersPerPage);
     };
   }
+
+  // Sorting
+  $scope.sortType = 'email'; // set the default sort type
+  $scope.sortReverse = false;  // set the default sort order
+  $scope.searchEmail  = '';
+
+
 }]);
 
 
