@@ -1,0 +1,42 @@
+<h2>The main dashboard page.</h2>
+
+<div class="container" ng-controller="dataController">
+
+<table class="table table-bordered table-striped">
+
+  <thead>
+    <tr>
+      <td>
+          Name
+      </td>
+
+      <td>
+          Email
+      </td>
+
+      <td>
+          Company
+      </td>
+
+      <td>
+          ID
+      </td>
+
+      <td>
+          Score
+      </td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.company }}</td>
+      <td>{{ user.id }}</td>
+      <td>{{ user.score }}</td>
+    </tr>
+  </tbody>
+
+</table>
+
