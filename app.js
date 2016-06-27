@@ -24,8 +24,8 @@ dashboardApp.controller('mainController', ['$scope', '$log', function($scope, $l
 
 // TABLE CONTROLLER
 dashboardApp.controller('tableController', ['$scope', '$http', function($scope, $http){
-  $scope.controllerName = 'tableController';
 
+  // Fetch & Display Data
   $scope.users = [];
 
   $http.get('/data.json')
@@ -45,9 +45,7 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
   }
 
   // Sorting & Searching
-  // $scope.sortType = 'email'; // set the default sort type
-  // $scope.sortReverse = false;  // set the default sort order
-  // $scope.searchEmail  = '';
+  $scope.searchEmail  = '';
 
   $scope.sort = {
       column: 'email',
@@ -66,7 +64,7 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
 
 }]);
 
-
+// Pagination
 angular.module('dashboardApp').filter('pagination', function() {
   return function(input, start) {
   if (!input || !input.length) { return; }
