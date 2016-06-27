@@ -13,11 +13,10 @@
         <td>
           Name
         </td>
-        <td class="link">
+        <td>
           Email
-          <span ng-click="changeSorting('email')">
-            <span ng-show="!sort.descending" class="fa fa-caret-down">down</span>
-            <span ng-show="sort.descending" class="fa fa-caret-up">up</span>
+          <span ng-click="changeSorting('email')" ng-class="{dropdown: !sort.descending, dropup: sort.descending}">
+            <span class="caret"></span>
           </span>
         </td>
 
