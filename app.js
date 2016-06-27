@@ -65,7 +65,24 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
   };
 
   // Mark Compromised Account
-
+  $scope.markCompromised = function(userId) {
+    console.log(userId);
+    for (var i = 0; i < $scope.users.length; i++) {
+      console.log($scope.users[i].id);
+      if ($scope.users[i].id === userId) {
+        console.log(userId);
+        console.log($scope.users[i].compromised);
+        if ($scope.users[i].compromised === true) {
+          $scope.users[i].compromised = false;
+          console.log("setting " + $scope.users[i].email + " to NOT COMPROMISED");
+        } else {
+          $scope.users[i].compromised = true;
+          console.log("setting " + $scope.users[i].email + " to COMPROMISED");
+        }
+        break
+      }
+    }
+  }
 
 }]);
 
