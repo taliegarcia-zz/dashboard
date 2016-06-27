@@ -68,16 +68,17 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
   $scope.markCompromised = function(userId) {
     console.log(userId);
     for (var i = 0; i < $scope.users.length; i++) {
-      console.log($scope.users[i].id);
-      if ($scope.users[i].id === userId) {
+      var user = $scope.users[i];
+      console.log(user.id);
+      if (user.id === userId) {
         console.log(userId);
-        console.log($scope.users[i].compromised);
-        if ($scope.users[i].compromised === true) {
-          $scope.users[i].compromised = false;
-          console.log("setting " + $scope.users[i].email + " to NOT COMPROMISED");
+        console.log(user["compromised"]);
+        if (user["compromised"] === true) {
+          user["compromised"] = false;
+          console.log("setting " + user.email + " to NOT COMPROMISED");
         } else {
-          $scope.users[i].compromised = true;
-          console.log("setting " + $scope.users[i].email + " to COMPROMISED");
+          user["compromised"] = true;
+          console.log("setting " + user.email + " to COMPROMISED");
         }
         break
       }

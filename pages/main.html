@@ -40,7 +40,7 @@
 
     <tbody>
       <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
-        <td ng-class="{danger: user.compromised, success: !user.compromised}"><span ng-click="markCompromised(user.id)" class="glyphicon glyphicon-warning-sign"></span></td>
+        <td ng-click="markCompromised(user.id)" ng-class="{danger: user.compromised, success: !user.compromised}"><span class="glyphicon glyphicon-warning-sign"></span></td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.company }}</td>
