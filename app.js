@@ -44,9 +44,11 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
     };
   }
 
-  // Sorting & Searching
+  // Search by Email
   $scope.searchEmail  = '';
 
+  // Sort
+  // // This is set up so that other columns could be selected for sorting too
   $scope.sort = {
       column: 'email',
       descending: false
@@ -61,6 +63,9 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
           sort.descending = false;
       }
   };
+
+  // Mark Compromised Account
+
 
 }]);
 
