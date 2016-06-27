@@ -5,6 +5,10 @@
   <div class="panel">
     <label for="usersPerPage">Users per page:</label>
     <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
+
+    <label for="searchEmail">Search Email:</label>
+    <input type="text" class="form-control" ng-model="searchEmail"/>
+
   </div>
 
   <table class="table table-bordered table-striped">
@@ -33,7 +37,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | limitTo: usersPerPage">
+      <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.company }}</td>
