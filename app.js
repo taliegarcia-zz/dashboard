@@ -67,26 +67,35 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
 }]);
 
 // ACCOUNT CONTROLLER
-dashboardApp.controller('accountController', ['$scope', '$cookies', function($scope, $cookies){
+dashboardApp.controller('accountController', ['$scope', '$cookies', '$cookieStore', function($scope, $cookies, $cookieStore){
   // Mark Compromised Account
   $scope.markCompromised = function(userId) {
-    console.log(userId);
     for (var i = 0; i < $scope.users.length; i++) {
       var user = $scope.users[i];
       if (user.id === userId) {
         if (user.compromised === true) {
           user.compromised = false;
           console.log("setting " + user.email + " to NOT COMPROMISED");
+          $cookieStore.remove(user.id);
+
         } else {
           user.compromised = true;
           console.log("setting " + user.email + " to COMPROMISED");
+          $cookieStore.put(user.id, "compromised");
         }
         break
       }
     }
   }
-}]);
 
+  $scope.getCompromised = function () {
+    // thought this would be a good ng-init function that might save load time...instead of checking each user cookies...
+  };
+
+  $scope.isCompromised = function(userId) {
+    return $cookieStore.get(userId) === 'compromised';
+  }
+}]);
 
 // Pagination
 angular.module('dashboardApp').filter('pagination', function() {
@@ -96,4 +105,5 @@ angular.module('dashboardApp').filter('pagination', function() {
     return input.slice(start);
   };
 });
+
 
