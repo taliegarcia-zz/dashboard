@@ -37,8 +37,13 @@
     </thead>
 
     <tbody ng-controller="accountController">
+
       <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
-        <td ng-class="{danger: isCompromised(user.id), success: !isCompromised(user.id)}"><span ng-click="markCompromised(user.id)" class="glyphicon glyphicon-warning-sign"></span></td>
+
+        <td ng-class="{danger: isCompromised(user.id), success: !isCompromised(user.id)}" ng-click="markCompromised(user.id)">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+        </td>
+
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.company }}</td>
