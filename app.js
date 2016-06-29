@@ -64,6 +64,10 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
       }
   };
 
+}]);
+
+// ACCOUNT CONTROLLER
+dashboardApp.controller('accountController', ['$scope', '$cookies', function($scope, $cookies){
   // Mark Compromised Account
   $scope.markCompromised = function(userId) {
     console.log(userId);
@@ -81,8 +85,8 @@ dashboardApp.controller('tableController', ['$scope', '$http', function($scope, 
       }
     }
   }
-
 }]);
+
 
 // Pagination
 angular.module('dashboardApp').filter('pagination', function() {
