@@ -1,57 +1,61 @@
 <div ng-controller="tableController" ng-init="showTable()">
 
-  <div class="panel">
-    <label for="usersPerPage">Users per page:</label>
-    <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
+  <div class="wrapper">
 
-    <label for="searchEmail">Search Email:</label>
-    <input type="text" class="form-control" ng-model="searchEmail"/>
+    <div class="input-field" id="search-box">
+      <label for="searchEmail">Search Email:</label>
+      <input type="text" class="form-control" ng-model="searchEmail"/>
+    </div>
 
-  </div>
+    <div class="input-field" id="users-per-page">
+      <label for="usersPerPage">Users per page:</label>
+      <input type="number" min="1" max="100" class="form-control" ng-model="usersPerPage"/>
+    </div>
 
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <td>
-        </td>
-        <td>
-          Name
-        </td>
-        <td>
-          Email
-          <span ng-click="changeSorting('email')" ng-class="{dropdown: !sort.descending, dropup: sort.descending}">
-            <span class="caret"></span>
-          </span>
-        </td>
+    <table class="table">
+      <thead>
+        <tr class="row header green">
+          <td>
+          </td>
+          <td>
+            Name
+          </td>
+          <td>
+            Email
+            <span ng-click="changeSorting('email')" ng-class="{dropdown: !sort.descending, dropup: sort.descending}">
+              <span class="caret"></span>
+            </span>
+          </td>
 
-        <td>
-          Company
-        </td>
-        <td>
-          ID
-        </td>
-        <td>
-          Score
-        </td>
-      </tr>
-    </thead>
+          <td>
+            Company
+          </td>
+          <td>
+            ID
+          </td>
+          <td>
+            Score
+          </td>
+        </tr>
+      </thead>
 
-    <tbody ng-controller="accountController">
+      <tbody ng-controller="accountController">
 
-      <tr ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
+        <tr class="row" ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
 
-        <td ng-class="{danger: isCompromised(user.id), success: !isCompromised(user.id)}" ng-click="markCompromised(user.id)">
-          <span class="glyphicon glyphicon-warning-sign"></span>
-        </td>
+          <td ng-class="{danger: isCompromised(user.id), success: !isCompromised(user.id)}" ng-click="markCompromised(user.id)">
+            <span class="glyphicon glyphicon-warning-sign"></span>
+          </td>
 
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.company }}</td>
-        <td>{{ user.id }}</td>
-        <td>{{ user.score }}</td>
-      </tr>
-    </tbody>
-  </table>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.company }}</td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  <div>
 
   <div class="pagination pagination-centered" ng-show="users.length">
     <ul class="pagination-control pagination">
@@ -60,7 +64,7 @@
       ng-click="curPage=curPage-1"> &lt; PREV</button>
       </li>
       <li>
-      <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+      <span>Page {{curPage + 1}} of {{ (((users | filter:searchEmail).length / usersPerPage) + 0.5) | number:0 }}</span>
       </li>
       <li>
       <button type="button" class="btn btn-primary"
