@@ -41,7 +41,7 @@
 
       <tbody ng-controller="accountController">
 
-        <tr class="row" ng-class="{danger: isCompromised(user.id), success: !isCompromised(user.id)}" ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
+        <tr class="row" ng-class="{danger: isCompromised(user.id)}" ng-repeat="user in users | orderBy:sort.column:sort.descending | pagination: curPage * usersPerPage | filter:searchEmail | limitTo: usersPerPage">
 
           <td ng-click="markCompromised(user.id)">
             <span class="glyphicon glyphicon-warning-sign"></span>
