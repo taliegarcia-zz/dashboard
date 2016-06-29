@@ -1,5 +1,5 @@
 // MODULE
-var dashboardApp = angular.module('dashboardApp', ['ngRoute']);
+var dashboardApp = angular.module('dashboardApp', ['ngRoute', 'ngCookies']);
 
 
 // ROUTES
